@@ -15,7 +15,7 @@ db.connect()
 
 # If database name is specified,
 # mypydbsimple will take it and use it for connection
-db.connect('proxies')
+db.connect('cars')
 
 # Getting records from database table
 # as simple as below. The result will be returned
