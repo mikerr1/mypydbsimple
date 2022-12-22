@@ -1,37 +1,45 @@
-from mypydb import DB
-from pprint import pprint
+from mypydbsimple import DB
 
+
+# Instantiate mypydbsimple DB class
+# by parsing a config file
+# mydbsimple will automatically read db config
 db = DB('mypydb.conf')
 
-pprint(db.__dict__)
-db.connect('proxies')
+
+# Connect to database to validate the config
+# is valid config to connect to the database
+# without specifiying dbname, connection automatically 
+# database name provided in config file
 db.connect()
 
-query = 'select * from proxies limit %s, %s'
+# If database name is specified,
+# mypydbsimple will take it and use it for connection
+db.connect('proxies')
+
+# Getting records from database table
+# as simple as below. The result will be returned
+# using fetchall() method as list
+query = 'select * from cars limit %s, %s'
 data = (1,2)
-rs = db.execute(query, data)
+rows = db.execute(query, data)
 
-pprint(db.__dict__)
-#value = rs[0]['key_name'] # if only return one value
-pprint(rs)
-#pprint(vars(db))
-
-exit()
+# Inserting records to database as simple as below example
 
 data = {
-    'title':'contoh article judul baru',
-    'source_url':'contoh source url',
-    'author_name':'contoh author name',
-    'unique_id':'254622345234523'
+    'manufacturer':'honda',
+    'model':'CRV',
+    'type':'X1',
+    'color':'piano black'
 }
 
 query = """INSERT INTO articles 
-    (title, source_url, author_name, unique_id)  
-    VALUES (%(title)s, %(source_url)s, %(author_name)s, %(unique_id)s)"""
+    (manufacturer, model, type, color)  
+    VALUES (%(manufacturer)s, %(model)s, %(type)s, %(color)s)"""
 
 
 db.execute(query, data)
 
-pprint(vars(db))
+
 
 
