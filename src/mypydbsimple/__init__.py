@@ -131,7 +131,7 @@ class DB:
             conn.commit()
             return rows
         
-        elif 'insert' in opword or 'update' in opword :
+        elif 'insert' in opword or 'update' in opword  or 'delete' in opword:
             self.query_operation = 'insert or update'
             self.query_statement = operation
             
